@@ -567,4 +567,301 @@ public partial class SDL
     /// <since>This function is available since SDL 3.2.0</since>
     [LibraryImport(SDLLibrary, EntryPoint = "SDL_memset"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     public static partial IntPtr Memset(IntPtr dst, int c, UIntPtr len);
+    
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_getenv"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    private static partial IntPtr SDL_getenv([MarshalAs(UnmanagedType.LPUTF8Str)] string name);
+
+    public static string? GetEnv(string name)
+    {
+        var ptr = SDL_getenv(name);
+        return ptr == IntPtr.Zero ? null : Marshal.PtrToStringUTF8(ptr);
+    }
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_getenv_unsafe"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    private static partial IntPtr SDL_getenv_unsafe([MarshalAs(UnmanagedType.LPUTF8Str)] string name);
+
+    public static string? GetEnvUnsafe(string name)
+    {
+        var ptr = SDL_getenv_unsafe(name);
+        return ptr == IntPtr.Zero ? null : Marshal.PtrToStringUTF8(ptr);
+    }
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_setenv_unsafe"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int SetEnvUnsafe(
+        [MarshalAs(UnmanagedType.LPUTF8Str)] string name,
+        [MarshalAs(UnmanagedType.LPUTF8Str)] string value,
+        int overwrite
+    );
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_unsetenv_unsafe"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int UnsetEnvUnsafe([MarshalAs(UnmanagedType.LPUTF8Str)] string name);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_qsort"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial void QSort(IntPtr @base, UIntPtr nmemb, UIntPtr size, CompareCallback compare);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_bsearch"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr BSearch(IntPtr key, IntPtr @base, UIntPtr nmemb, UIntPtr size, CompareCallback compare);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_qsort_r"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial void QSortR(IntPtr @base, UIntPtr nmemb, UIntPtr size, CompareCallbackR compare, IntPtr userdata);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_bsearch_r"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr BSearchR(IntPtr key, IntPtr @base, UIntPtr nmemb, UIntPtr size, CompareCallbackR compare, IntPtr userdata);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_abs"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int Abs(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_isalpha"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsAlpha(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_isalnum"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsAlnum(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_isblank"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsBlank(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_iscntrl"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsCntrl(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_isdigit"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsDigit(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_isxdigit"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsXDigit(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_ispunct"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsPunct(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_isspace"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsSpace(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_isupper"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsUpper(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_islower"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsLower(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_isprint"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsPrint(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_isgraph"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IsGraph(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_toupper"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int ToUpper(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_tolower"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int ToLower(int x);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_crc16"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial ushort Crc16(ushort crc, IntPtr data, UIntPtr len);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_crc32"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial uint Crc32(uint crc, IntPtr data, UIntPtr len);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_murmur3_32"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial uint Murmur3_32(IntPtr data, UIntPtr len, uint seed);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_memcpy"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Memcpy(IntPtr dst, IntPtr src, UIntPtr len);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_memmove"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Memmove(IntPtr dst, IntPtr src, UIntPtr len);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_memset4"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Memset4(IntPtr dst, uint val, UIntPtr dwords);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_memcmp"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int Memcmp(IntPtr s1, IntPtr s2, UIntPtr len);
+
+    // wchar_t helpers (marshalled as raw pointers; wchar_t width is platform-dependent)
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcslen"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Wcslen(IntPtr wstr);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcsnlen"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Wcsnlen(IntPtr wstr, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcslcpy"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Wcslcpy(IntPtr dst, IntPtr src, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcslcat"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Wcslcat(IntPtr dst, IntPtr src, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcsdup"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Wcsdup(IntPtr wstr);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcsstr"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Wcsstr(IntPtr haystack, IntPtr needle);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcsnstr"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Wcsnstr(IntPtr haystack, IntPtr needle, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcscmp"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int Wcscmp(IntPtr str1, IntPtr str2);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcsncmp"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int Wcsncmp(IntPtr str1, IntPtr str2, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcscasecmp"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int Wcscasecmp(IntPtr str1, IntPtr str2);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcsncasecmp"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int Wcsncasecmp(IntPtr str1, IntPtr str2, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_wcstol"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial long Wcstol(IntPtr str, out IntPtr endp, int @base);
+
+    // UTF-8 string helpers
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strlen"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Strlen([MarshalAs(UnmanagedType.LPUTF8Str)] string str);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strnlen"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Strnlen([MarshalAs(UnmanagedType.LPUTF8Str)] string str, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strlcpy"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Strlcpy(IntPtr dst, [MarshalAs(UnmanagedType.LPUTF8Str)] string src, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_utf8strlcpy"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Utf8Strlcpy(IntPtr dst, [MarshalAs(UnmanagedType.LPUTF8Str)] string src, UIntPtr dstBytes);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strlcat"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Strlcat(IntPtr dst, [MarshalAs(UnmanagedType.LPUTF8Str)] string src, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strdup"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Strdup([MarshalAs(UnmanagedType.LPUTF8Str)] string str);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strndup"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Strndup([MarshalAs(UnmanagedType.LPUTF8Str)] string str, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strrev"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Strrev(IntPtr str);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strupr"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Strupr(IntPtr str);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strlwr"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Strlwr(IntPtr str);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strchr"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Strchr([MarshalAs(UnmanagedType.LPUTF8Str)] string str, int c);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strrchr"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Strrchr([MarshalAs(UnmanagedType.LPUTF8Str)] string str, int c);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strstr"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Strstr([MarshalAs(UnmanagedType.LPUTF8Str)] string haystack, [MarshalAs(UnmanagedType.LPUTF8Str)] string needle);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strnstr"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Strnstr([MarshalAs(UnmanagedType.LPUTF8Str)] string haystack, [MarshalAs(UnmanagedType.LPUTF8Str)] string needle, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strcasestr"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Strcasestr([MarshalAs(UnmanagedType.LPUTF8Str)] string haystack, [MarshalAs(UnmanagedType.LPUTF8Str)] string needle);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strtok_r"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr StrtokR(IntPtr str, [MarshalAs(UnmanagedType.LPUTF8Str)] string delim, ref IntPtr saveptr);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_utf8strlen"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Utf8Strlen([MarshalAs(UnmanagedType.LPUTF8Str)] string str);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_utf8strnlen"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Utf8Strnlen([MarshalAs(UnmanagedType.LPUTF8Str)] string str, UIntPtr bytes);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_itoa"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Itoa(int value, IntPtr str, int radix);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_uitoa"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Uitoa(uint value, IntPtr str, int radix);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_ltoa"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Ltoa(long value, IntPtr str, int radix);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_ultoa"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Ultoa(ulong value, IntPtr str, int radix);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_lltoa"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Lltoa(long value, IntPtr str, int radix);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_ulltoa"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Ulltoa(ulong value, IntPtr str, int radix);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_atoi"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int Atoi([MarshalAs(UnmanagedType.LPUTF8Str)] string str);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_atof"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial double Atof([MarshalAs(UnmanagedType.LPUTF8Str)] string str);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strtol"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial long Strtol([MarshalAs(UnmanagedType.LPUTF8Str)] string str, out IntPtr endp, int @base);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strtoul"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial ulong Strtoul([MarshalAs(UnmanagedType.LPUTF8Str)] string str, out IntPtr endp, int @base);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strtoll"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial long Strtoll([MarshalAs(UnmanagedType.LPUTF8Str)] string str, out IntPtr endp, int @base);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strtoull"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial ulong Strtoull([MarshalAs(UnmanagedType.LPUTF8Str)] string str, out IntPtr endp, int @base);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strtod"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial double Strtod([MarshalAs(UnmanagedType.LPUTF8Str)] string str, out IntPtr endp);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strcmp"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int Strcmp([MarshalAs(UnmanagedType.LPUTF8Str)] string str1, [MarshalAs(UnmanagedType.LPUTF8Str)] string str2);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strncmp"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int Strncmp([MarshalAs(UnmanagedType.LPUTF8Str)] string str1, [MarshalAs(UnmanagedType.LPUTF8Str)] string str2, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strcasecmp"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int Strcasecmp([MarshalAs(UnmanagedType.LPUTF8Str)] string str1, [MarshalAs(UnmanagedType.LPUTF8Str)] string str2);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strncasecmp"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int Strncasecmp([MarshalAs(UnmanagedType.LPUTF8Str)] string str1, [MarshalAs(UnmanagedType.LPUTF8Str)] string str2, UIntPtr maxlen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_strpbrk"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Strpbrk([MarshalAs(UnmanagedType.LPUTF8Str)] string str, [MarshalAs(UnmanagedType.LPUTF8Str)] string breakset);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_StepUTF8"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial uint StepUtf8(ref IntPtr pstr, ref UIntPtr pslen);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_StepBackUTF8"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial uint StepBackUtf8(IntPtr start, ref IntPtr pstr);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_UCS4ToUTF8"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr Ucs4ToUtf8(uint codepoint, IntPtr dst);
+
+    // iconv
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_iconv_open"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr IconvOpen(
+        [MarshalAs(UnmanagedType.LPUTF8Str)] string tocode,
+        [MarshalAs(UnmanagedType.LPUTF8Str)] string fromcode
+    );
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_iconv_close"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial int IconvClose(IntPtr cd);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_iconv"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial UIntPtr Iconv(
+        IntPtr cd,
+        ref IntPtr inbuf,
+        ref UIntPtr inbytesleft,
+        ref IntPtr outbuf,
+        ref UIntPtr outbytesleft
+    );
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_iconv_string"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    public static partial IntPtr IconvString(
+        [MarshalAs(UnmanagedType.LPUTF8Str)] string tocode,
+        [MarshalAs(UnmanagedType.LPUTF8Str)] string fromcode,
+        IntPtr inbuf,
+        UIntPtr inbytesleft
+    );
+
+    // overflow helpers
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_size_mul_check_overflow"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    [return: MarshalAs(UnmanagedType.I1)]
+    public static partial bool SizeMulCheckOverflow(UIntPtr a, UIntPtr b, out UIntPtr ret);
+
+    [LibraryImport(SDLLibrary, EntryPoint = "SDL_size_add_check_overflow"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    [return: MarshalAs(UnmanagedType.I1)]
+    public static partial bool SizeAddCheckOverflow(UIntPtr a, UIntPtr b, out UIntPtr ret);
 }

@@ -97,6 +97,12 @@ public static partial class SDL
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void FreeFunc(IntPtr mem);
     
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int CompareCallback(nint a, nint b);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int CompareCallbackR(nint userdata, nint a, nint b);
+    
     
     /// <code>typedef void (*SDL_FunctionPointer)(void);</code>
     /// <summary>
