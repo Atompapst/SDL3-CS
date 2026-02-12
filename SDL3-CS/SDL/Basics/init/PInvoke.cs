@@ -298,6 +298,6 @@ public static partial class SDL
     /// <seealso cref="SetAppMetadata"/>
     /// <seealso cref="SetAppMetadataProperty"/>
     [LibraryImport(SDLLibrary, EntryPoint = "SDL_GetAppMetadataProperty"), UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
-    [return: MarshalAs(UnmanagedType.I1)]
-    public static partial bool GetAppMetadataProperty([MarshalAs(UnmanagedType.LPUTF8Str)] string name);
+    [return: MarshalAs(UnmanagedType.LPUTF8Str)]
+    public static partial string GetAppMetadataProperty([MarshalAs(UnmanagedType.LPUTF8Str)] string name);
 }
